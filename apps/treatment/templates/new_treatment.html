@@ -1,0 +1,15 @@
+{% extends 'home.html' %}
+{% block contenido_page %}
+    <div>
+        <div class="card mb-4">
+            <div class="card-header">{{ title }}</div>
+            <div class="card-body row">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                    <button type="submit" class="btn btn-primary my-3">Iniciar Tratamiento</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

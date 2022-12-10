@@ -1,0 +1,56 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block contenido_page %}
+    <div class="">
+        <div class="card mb-4">
+            <div class="card-header">{{ title }}</div>
+            <div class="card-body">
+                <table class="table table-bordered" id="datatablesSimple">
+                    <thead>
+                    <tr>
+                        <th>Imagen</th>
+                        <th>Nombre Completo</th>
+                        <th>Direccion</th>
+                        <th>Cedula</th>
+                        <th>Genero</th>
+                        <th>Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for object in object_list %}
+                        <tr>
+                            <td>
+                                {% if object.gender == "FEMENINO"%}
+                                    <img src="{% static 'img/profile1.png' %}" class="rounded mx-auto d-block"
+                                        style="width: 60px;">
+                                {% endif %}
+                                {% if object.gender == "MASCULINO" %}
+                                    <img src="{% static 'img/profile-2.png' %}" class="rounded mx-auto d-block"
+                                        style="width: 60px;">
+                                {% endif %}
+                            </td>
+                            <td class="align-middle">{{ object.first_name }} {{ object.last_name }}</td>
+                            <td class="align-middle">{{ object.direction }}</td>
+                            <td class="align-middle">{{ object.identification }}</td>
+                            <td class="align-middle">{{ object.gender }}</td>
+
+                            <td class="text-center align-middle">
+                                <a href="{% url 'update_patients' object.id %}"
+                                   class="btn btn-datatable btn-warning mx-1 ">
+                                    <i class="feather-edit"></i></a>
+                                <a href="{% url 'delete_patients' object.id %}" class="btn btn-datatable btn-red ">
+                                    <i class="feather-archive"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#datatablesSimple').DataTable();
+        });
+    </script>
+{% endblock %}

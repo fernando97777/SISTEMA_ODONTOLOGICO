@@ -1,0 +1,49 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block contenido_page %}
+    <form action="" method="get">
+        <div>
+            <div class="card mb-4">
+                <div class="card-header mb-2">{{ title }}</div>
+                <div class="row">
+                    <div class="input-group input-group-joined input-group-solid w-50 mx-4 text-end">
+                        <input class="form-control " type="search" placeholder="Buscar Paciente"
+                               id="paciente" name="paciente"/>
+                    </div>
+                    <button type="submit" class="col-2 btn btn-info fw-bold">Buscar</button>
+                </div>
+
+                <div class="card-body row">
+                    <div class="row">
+                        {% for object in object_list %}
+                            <div class="col-4 py-2">
+                                <div class="shadow-sm rounded-2 p-2">
+                                    <div class="p-1">
+                                        {% if object.patient.gender == "FEMENINO" %}
+                                            <img src="{% static 'img/profile1.png' %}" class="rounded mx-auto d-block"
+                                                 style="width: 200px; margin-bottom: 1rem">
+                                        {% endif %}
+                                        {% if object.patient.gender == "MASCULINO" %}
+                                            <img src="{% static 'img/profile-2.png' %}" class="rounded mx-auto d-block"
+                                                 style="height: 200px; margin-bottom: 1rem">
+                                        {% endif %}
+                                    </div>
+                                    <p class="py-1"><strong>Paciente:</strong> <br>{{ object.patient }}</p>
+                                    <p class="py-1"><strong>Tratamiento:</strong> <br>{{ object.treatment }}</p>
+                                    <div class="row p-2">
+                                        <a type="submit" class="btn btn-info w-25 m-1 col">Bitacora</a>
+                                        <a href="{% url 'update_treatment' object.id %}" type="submit"
+                                           class="btn btn-warning w-25 m-1 col">Modificar</a>
+                                        <a href="{% url 'delete_treatment' object.id %}" type="submit"
+                                           class="btn btn-danger w-25 m-1 col">Eliminar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}
