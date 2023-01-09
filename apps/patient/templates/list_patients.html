@@ -21,12 +21,12 @@
                         <tr>
                             <td>
                                 {% if object.gender == "FEMENINO"%}
-                                    <img src="{% static 'img/profile1.png' %}" class="rounded mx-auto d-block"
-                                        style="width: 60px;">
+                                    <img src="{% static 'img/profile1.png' %}" class="rounded-circle mx-auto d-block"
+                                        style="width: 50px;">
                                 {% endif %}
                                 {% if object.gender == "MASCULINO" %}
-                                    <img src="{% static 'img/profile-2.png' %}" class="rounded mx-auto d-block"
-                                        style="width: 60px;">
+                                    <img src="{% static 'img/profile-2.png' %}" class="rounded-circle mx-auto d-block"
+                                        style="width: 50px;">
                                 {% endif %}
                             </td>
                             <td class="align-middle">{{ object.first_name }} {{ object.last_name }}</td>

@@ -1,0 +1,73 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block contenido_page %}
+    <form action="" method="get">
+        <div>
+            <div class="card mb-4">
+                <div class="card-header mb-2">{{ title }}</div>
+                <div class="row">
+                    <div class="input-group input-group-joined input-group-solid w-50 mx-4 text-end">
+                        <input class="form-control " type="search"
+                               placeholder="Buscar por estado de cita (ej. pendiente)"
+                               id="quote" name="quote"/>
+                    </div>
+                    <button type="submit" class="col-1 btn btn-info fw-bold">Buscar</button>
+                </div>
+
+                <div class="card-body row">
+                    <div class="row">
+                        {% for object in object_list %}
+                            <div class="col-4 py-2">
+                                {% if object.status_quotes == "COMPLETADO" %}
+                                    <div class="card card-body shadow-sm rounded-2 p-2"
+                                         style="background-color:#e9ffe3; border-color:#49f02b">
+                                        <div class="py-1">
+                                            <p class="text-black"><strong>Paciente:</strong></p>
+                                            <p class="text-black">{{ object.patient.first_name }} {{ object.patient.last_name }}</p>
+                                        </div>
+                                        <p class="py-1 text-black"><strong>Fecha y Hora:</strong>
+                                            <br>{{ object.date_hour }}</p>
+                                        <p class="py-1 text-black"><strong>Estado: </strong>
+                                            <br>
+                                            <strong class="text-success">{{ object.status_quotes }}</strong>
+                                        </p>
+                                    </div>
+                                {% endif %}
+                                {% if object.status_quotes == "CANCELADO" %}
+                                    <div class="card card-body shadow-sm rounded-2 p-2"
+                                         style="background-color: #fcd4d4; border-color: #f02b2b">
+                                        <div class="py-1">
+                                            <p class="text-black"><strong>Paciente:</strong></p>
+                                            <p class="text-black">{{ object.patient.first_name }} {{ object.patient.last_name }}</p>
+                                        </div>
+                                        <p class="py-1 text-black"><strong>Fecha y Hora:</strong>
+                                            <br>{{ object.date_hour }}</p>
+                                        <p class="py-1 text-black"><strong>Estado: </strong>
+                                            <br>
+                                            <strong class="text-danger">{{ object.status_quotes }}</strong>
+                                        </p>
+                                    </div>
+                                {% endif %}
+                                {% if object.status_quotes == "PENDIENTE" %}
+                                    <div class="card card-body shadow-sm rounded-2 p-2"
+                                         style="background-color: #fcf5b3; border-color: #f5de05">
+                                        <div class="py-1">
+                                            <p class="text-black"><strong>Paciente:</strong></p>
+                                            <p class="text-black">{{ object.patient.first_name }} {{ object.patient.last_name }}</p>
+                                        </div>
+                                        <p class="py-1 text-black"><strong>Fecha y Hora:</strong>
+                                            <br>{{ object.date_hour }}</p>
+                                        <p class="py-1 text-black"><strong>Estado: </strong>
+                                            <br>
+                                            <strong class="text-warning">{{ object.status_quotes }}</strong>
+                                        </p>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block contenido_page %}
+    <div class="row">
+        {#Pacientes#}
+        <div class="col-xl-3 col-md-6 mb-3">
+            <!-- Dashboard info widget 1-->
+            <div class="card border-start-lg border-start-primary h-auto">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <div class="small fw-bold text-primary mb-1">N° Pacientes</div>
+                            <div class="h5">{{ patient_number }}</div>
+                        </div>
+                        <div class="ms-3">
+                            <img src="{% static 'img/users-main.svg' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {#citas#}
+        <div class="col-xl-3 col-md-6 mb-3">
+            <!-- Dashboard info widget 2-->
+            <div class="card border-start-lg border-start-warning h-auto">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <div class="small fw-bold text-secondary mb-1">Citas</div>
+                            {% if quotes_number %}
+                                <div class="h5">{{ quotes_number }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="ms-2">
+                            <img src="{% static 'img/clock-main.svg' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {#Tratamientos Activos#}
+        <div class="col-xl-3 col-md-6 mb-3">
+            <!-- Dashboard info widget 3-->
+            <div class="card border-start-lg border-start-success h-auto">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <div class="small fw-bold text-success mb-1">Tratamientos Activos</div>
+                            <div class="h5">{{ treatment_number }}</div>
+                        </div>
+                        <div class="ms-2">
+                            <img src="{% static 'img/clipboard-main.svg' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form action="" method="get">
+        <div>
+            <div class="card mb-4">
+                <div class="card-header mb-2">{{ title }}</div>
+                <div class="row">
+                    <div class="input-group input-group-joined input-group-solid w-50 mx-4 mt-2 text-end">
+                        <input class="form-control " type="search" placeholder="Buscar Paciente"
+                               id="paciente" name="paciente"/>
+                    </div>
+                    <button type="submit" class="col-1 btn btn-info fw-bold h-50 mt-2">Buscar</button>
+                </div>
+
+                <div class="card-body row">
+                    <div class="row">
+                        {% for object in object_list %}
+                            {% if object.status_quotes == "PENDIENTE" %}
+                                <div class="col-4 py-1 mb-2">
+                                    <div class=" card shadow-sm rounded-2 p-2"
+                                         style="background-color: #feeeb8; border-color: orange">
+                                        <div>
+                                            <p class="text-gray-900"><strong>Paciente:</strong>
+                                            <br>{{ object.patient.first_name }} {{ object.patient.last_name }}</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-gray-900"><strong>Fecha y Hora:</strong>
+                                            <br>{{ object.date_hour }}</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-gray-900"><strong>Estado: </strong>
+                                            <strong class="text-warning">{{ object.status_quotes }}</strong>
+                                            </p>
+                                        </div>
+                                        <div class="row p-2">
+                                            <a href="{% url 'update_quotes' object.id %}" type="submit"
+                                               class="btn btn-warning m-1 col">Actualizar estado</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
