@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Receta</title>
+    <style>
+        .texto {
+            text-align: center;
+        }
+
+        table {
+            text-align: center;
+            border: 1px solid black;
+            padding-top: 2px;
+            text-transform: uppercase;
+        }
+
+        @page {
+            size: letter portrait;
+            @frame content_frame {
+                left: 50pt;
+                width: 512pt;
+                top: 50pt;
+                height: 692pt;
+            }
+        }
+    </style>
+</head>
+<body>
+<h1 class="texto">DENTAL LOJA</h1>
+<h4 class="texto">Med.Odontologa Alejandra Torres</h4>
+<p>Ruc: 9999999999999999</p>
+<p>Direccion: Quito y Bolivar</p>
+<p>Paciente: {{ patient }}</p>
+<p>Fecha: {{ date }}</p>
+
+<table>
+    <tr>
+        <th>Medicamentos</th>
+    </tr>
+    <tr>
+        <td>{{ table }}</td>
+    </tr>
+</table>
+</body>
+</html>

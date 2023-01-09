@@ -1,42 +1,32 @@
 from django import forms
-
 from apps.patient.models import Patients
+from superadmin.forms import ModelForm
+
+from apps.treatment.models import Prescription
 
 
-class AddPatientsForm(forms.ModelForm):
+class AddPatientsForm(ModelForm):
     class Meta:
         model = Patients
-        fields = '__all__'
+        fields = (("first_name","last_name"))
+
+
+class AddPrescription(forms.ModelForm):
+    class Meta:
+        model = Prescription
+        fields = "__all__"
         widgets = {
-            'first_name': forms.TextInput(
+            'patient': forms.Select(
                 attrs={
                     'class': 'form-control',
-                    'style': 'margin-top: 5px;'
+                    'style': 'margin-top: 5px; margin-bottom: 10px;'
                 }
             ),
-            'last_name': forms.TextInput(
+            'prescription': forms.TextInput(
                 attrs={
                     'class': 'form-control',
-                    'style': 'margin-top: 5px;'
-                }
-            ),
-            'direction': forms.TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'style': 'margin-top: 5px;'
-                }
-            ),
-            'identification': forms.TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'style': 'margin-top: 5px;'
-                }
-            )
-            ,
-            'gender': forms.Select(
-                attrs={
-                    'class': 'form-control',
-                    'style': 'margin-top: 5px;'
+                    'style': 'margin-top: 5px; margin-bottom: 10px;'
                 }
             ),
         }
+

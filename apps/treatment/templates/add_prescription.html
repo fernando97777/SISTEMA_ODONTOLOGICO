@@ -1,0 +1,16 @@
+{% extends 'home.html' %}
+{% block contenido_page %}
+    <div>
+        <div class="card mb-4">
+            <div class="card-header">{{ title }}</div>
+            <div class="card-body row">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    {{ form.media }}
+                    <button type="submit" class="btn btn-primary my-3" name="donwload_pdf">Generar Receta</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
